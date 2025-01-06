@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédiction de la santé mentale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            font-size: 14px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 24px; /* Plus grand pour mieux mettre en valeur */
+            font-weight: bold;
+            padding: 15px;
+            text-align: center;
+        }
+        .success {
+            color: green;
+            background-color: #e8f5e8; /* Vert pâle */
+            border: 2px solid green;
+        }
+        .danger {
+            color: red;
+            background-color: #f8d7da; /* Rouge pâle */
+            border: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Prédiction de la santé mentale</h1>
+    <p>Veuillez répondre aux questions suivantes :</p>
+    
+    <form method="POST" action="/predict">
+        <div class="form-group">
+            <label for="self-harm">Avez-vous pensé à vous faire du mal ?</label>
+            <select id="self-harm" name="self-harm" required>
+                <option value="0">Jamais</option>
+                <option value="1">Dans le passé</option>
+                <option value="2">Parfois</option>
+                <option value="3">Toujours</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="negatif_thoughts">À quelle fréquence avez-vous des pensées négatives sur l’avenir ?</label>
+            <select id="negatif_thoughts" name="negatif_thoughts" required>
+                <option value="0">Jamais</option>
+                <option value="1">Parfois</option>
+                <option value="2">Toujours</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sleep">Combien d’heures de sommeil dormez-vous en moyenne par nuit ?</label>
+            <select id="sleep" name="sleep" required>
+                <option value="0">Entre 5-8 heures</option>
+                <option value="1">Plus de 8 heures</option>
+                <option value="2">Moins de 5 heures</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fatigue">Vous sentez-vous souvent fatigué physiquement ou manquez-vous d'énergie, même après vous être reposé ?</label>
+            <select id="fatigue" name="fatigue" required>
+                <option value="0">Non</option>
+                <option value="1">Oui</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="academic_pressure">À quelle fréquence vous sentez-vous submergé par la pression académique ?</label>
+            <select id="academic_pressure" name="academic_pressure" required>
+                <option value="0">Jamais</option>
+                <option value="1">Parfois</option>
+                <option value="2">Toujours</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="concentration">Avez-vous du mal à vous concentrer sur vos tâches ?</label>
+            <select id="concentration" name="concentration" required>
+                <option value="0">Non</option>
+                <option value="1">Oui</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="Year _of _Study">Année d'étude actuelle ?</label>
+            <select id="Year _of _Study" name="Year _of _Study" required>
+                <option value="0">2e année</option>
+                <option value="1">4e année</option>
+                <option value="2">5e année</option>
+                <option value="3">3e année</option>
+                <option value="4">1ère année</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label for="family_history">Avez-vous des antécédents médicaux personnels ou familiaux de problèmes mentaux ?</label>
+            <select id="family_history" name="family_history" required>
+                <option value="0">Non</option>
+                <option value="1">Oui, familial</option>
+                <option value="2">Oui, personnel</option>
+                <option value="3">Oui, les deux</option>
+            </select>
+        </div>
+        
+        <button type="submit">Faire la prédiction</button>
+    </form>
+
+    {% if message %}
+        <div class="message {{ message_class }}">
+            <p>{{ message }}</p>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
